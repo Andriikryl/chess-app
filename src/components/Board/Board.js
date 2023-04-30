@@ -1,4 +1,6 @@
 import { getCharacter } from "../../helper";
+import Files from "./bits/Files";
+import Ranks from "./bits/Ranks";
 
 const Board = () => {
   const getClassName = (i, j) => {
@@ -16,6 +18,8 @@ const Board = () => {
 
   return (
     <div className="board">
+      <Ranks ranks={ranks} />
+
       <div className="tiles">
         {ranks.map((rank, i) =>
           files.map((file, j) => (
@@ -26,6 +30,8 @@ const Board = () => {
           ))
         )}
       </div>
+
+      <Files files={files} />
     </div>
   );
 };
