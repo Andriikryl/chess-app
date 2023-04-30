@@ -1,6 +1,12 @@
 import { getCharacter } from "../../helper";
 
 const Board = () => {
+  const getClassName = (i, j) => {
+    let c = "tile";
+    c += (i + j) % 2 === 0 ? " tile--dark " : " tile--light ";
+    return c;
+  };
+
   const ranks = Array(8)
     .fill()
     .map((x, i) => 8 - i);
@@ -10,10 +16,10 @@ const Board = () => {
 
   return (
     <div className="board">
-      <div className="titles">
+      <div className="tiles">
         {ranks.map((rank, i) =>
           files.map((file, j) => (
-            <div>
+            <div key={file + "-" + rank} className={getClassName(i, j)}>
               {rank}
               {file}
             </div>
