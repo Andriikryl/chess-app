@@ -14,7 +14,7 @@ const Board = () => {
     .map((x, i) => 8 - i);
   const files = Array(8)
     .fill()
-    .map((x, i) => getCharacter(i));
+    .map((x, i) => i + 1);
 
   return (
     <div className="board">
@@ -23,10 +23,10 @@ const Board = () => {
       <div className="tiles">
         {ranks.map((rank, i) =>
           files.map((file, j) => (
-            <div key={file + "-" + rank} className={getClassName(i, j)}>
-              {rank}
-              {file}
-            </div>
+            <div
+              key={file + "-" + rank}
+              className={getClassName(9 - i, j)}
+            ></div>
           ))
         )}
       </div>

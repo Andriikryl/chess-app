@@ -1,8 +1,10 @@
+import { getCharacter } from "../../../helper";
+
 const Files = ({ files }) => {
   return (
     <div className="files">
       {files.map((file) => (
-        <span key={file}>{file}</span>
+        <span key={file}>{getCharacter(file)}</span>
       ))}
     </div>
   );
