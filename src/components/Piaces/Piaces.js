@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import Piace from "./Piace";
 import { copyPosition, createPosition } from "../../helper";
 import { useAppContext } from "../../contexts/Context";
-import { makeNewMove } from "../../reducer/actions/move";
+import { clearCandidates, makeNewMove } from "../../reducer/actions/move";
 
 const Piaces = () => {
   const ref = useRef();
@@ -26,10 +26,13 @@ const Piaces = () => {
 
     const [p, rank, file] = e.dataTransfer.getData("text").split(",");
 
-    newPosition[Number(rank)][Number(file)] = "";
-    newPosition[x][y] = p;
+    if (appState.candidateMoves?.find((m) => m[0] === x && m[1] === y)) {
+      newPosition[Number(rank)][Number(file)] = "";
+      newPosition[x][y] = p;
+      dispatch(makeNewMove({ newPosition }));
+    }
 
-    dispatch(makeNewMove({ newPosition }));
+    dispatch(clearCandidates());
   };
 
   const onDragOver = (e) => {
